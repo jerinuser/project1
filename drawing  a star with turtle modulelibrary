@@ -1,0 +1,37 @@
+from turtle import Turtle, Screen, done
+
+def rStars(turtle, size):
+    if size < 11:  # base case: stop when the size is too small
+        return
+
+    turtle.begin_fill()
+    turtle.fillcolor("red")
+    for i in range(5):
+        turtle.forward(size)
+        rStars(turtle, size / 3)  # recursively draw smaller stars
+        turtle.right(144)
+    turtle.end_fill()
+
+def pressCancel():
+    p = Screen().textinput("Next Shape", "Press cancel to exit")
+    if p is None:
+        Screen().bye()
+        return True
+    return False
+
+if __name__ == "__main__":
+    screen = Screen()
+    screen.setup(640, 550, 0, 0)
+
+    t = Turtle()
+    t.penup()
+    t.goto(-100, 100)
+    t.pendown()
+
+    rStars(t, 45)
+    t.hideturtle()
+
+    while not pressCancel():
+        pass  # keep prompting until the user cancels
+
+    done()  # keep the window open until closed by the user
